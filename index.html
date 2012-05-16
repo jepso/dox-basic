@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="en"><head><title>dox-basic</title><style>body {
+  padding: 50px;
+  font: 14/1.6 "Helvetica Neue", Helvetica, sans-serif, arial;
+  color: #303030;
+}
+p code,
+li code {
+  border: 1px solid #eee;
+  padding: 1px 5px;
+  font: 12px monaco, monospace;
+  color: #0bb1e4;
+}
+pre {
+  padding: 20px;
+  border: 1px solid #eee;
+  background: #272822;
+}
+pre code {
+  font: 12px monaco, monospace;
+  color: #F8F8F2;
+}
+pre code .string {
+  color: #E6DB74;
+}
+pre code .number {
+  color: #AE81FF;
+}
+pre code .keyword {
+  color: #F92672;
+}
+pre code .comment {
+  color: #b3b3b3;
+}
+h1 {
+  font-size: 4em;
+}
+.comment h1 {
+  font-size: 2em;
+}</style></head><body><h1>dox-basic</h1></body><div class="comment"><div class="description"><h2>Example</h2>
+
+<pre><code><span class="keyword">var</span> result = <span class="keyword">require</span>(<span class="string">'dox-basic'</span>).parse(source);
+<span class="keyword">if</span>(x&lt;<span class="number">4</span>)console.log(x);
+</code></pre></div></div><div class="comment property"><h1>exports.name</h1><div class="description"><p>Parser name</p></div></div><pre><code>exports.name = 'dox-basic';</code></pre><div class="comment property"><h1>exports.version</h1><div class="description"><p>Parser version</p></div></div><pre><code>exports.version = '0.0.1';</code></pre><div class="comment method"><h1>exports.parse()</h1><div class="description"><p>Parse source code to produce documentation</p></div></div><pre><code>exports.parse = <span class="keyword">function</span>(source, options){
+    options = options || {};
+    <span class="keyword">var</span> title = options.title || <span class="string">'Documentation'</span>;
+    <span class="keyword">var</span> dox = <span class="keyword">require</span>(<span class="string">'dox'</span>);
+    <span class="keyword">var</span> obj = dox.parseComments(source, options);
+
+    <span class="keyword">return</span> highlight(template({title: <span class="string">'dox-basic'</span>, comments:obj}));
+}</code></pre></html>

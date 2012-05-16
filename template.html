@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title><%= title %></title>
+  <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css"/>
+  <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css"/>
+  <style>
+    pre {
+      background: #272822;
+      overflow: auto;
+      word-wrap: normal;
+      white-space: pre;
+    }
+    pre code {
+      font: 12px monaco, monospace;
+      color: #F8F8F2;
+    }
+    pre code .string {
+      color: #E6DB74;
+    }
+    pre code .number {
+      color: #AE81FF;
+    }
+    pre code .keyword {
+      color: #F92672;
+    }
+    pre code .comment {
+      color: #b3b3b3;
+    }
+    h1.pagetitle {
+      font-size: 4em;
+      margin-bottom: 20px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <h1 class="pagetitle"><%= title %></h1>
+    </div>
+    <div class="row-fluid">
+      <div>
+        <% comments.forEach(function(comment){ %>
+          <% if(!comment.ignore && !comment.isPrivate) {%>
+            <div class="comment <%= (comment.ctx?comment.ctx.type:'')%>">
+              <% if(comment.ctx){ %><h1><%= comment.ctx.string %></h1><% } %>
+              <div class="description"><%- comment.description.full %></div>
+              <% if(comment.code){ %>
+                <pre><code><%- comment.code %></code></pre>
+              <% } %>
+            </div>
+          <% } %>
+        <% }) %>
+      </div>
+    </div>
+  </div>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.0.2/bootstrap.min.js"/>
+</html>
