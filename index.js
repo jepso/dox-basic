@@ -12,8 +12,10 @@ var fs        = require('fs'),
 
 /**
  * # Example Usage
+ * 
  *     npm install dox-basic -g
  *     dox-basic -t "Library Name"<index.js>readme.html
+ *     dox-basic -m -t "Library Name"<index.js>readme.md
  */
 
 /**
@@ -41,6 +43,17 @@ exports.parse = function(source, options){
     options.md = options.md || options.markdown;
     var dox = require('dox');
     var obj = dox.parseComments(source, {raw:options.md});
+
+    //Normalize comment line endings
+    obj.forEach(function(comment){
+        if(comment.tags){
+            comment.tags.forEach(function(tag){
+                if(tag.name) tag.name = tag.name.replace(/\r$/g, '');
+                if(tag.name) tag.description = tag.description.replace(/\r$/g, '');
+            });
+        }
+    });
+
     if(options.md){
         return ejs.render(templateMD, {title: title, comments:obj});
     }else{
