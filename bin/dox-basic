@@ -14,6 +14,7 @@ var program = require('commander')
 program
   .version(formatter.version)
   .option('-t, --title <string>', 'The title for the page produced')
+  .option('-m, --markdown', 'output a markdown document with instead of html')
 // examples
 
 program.on('--help', function(){

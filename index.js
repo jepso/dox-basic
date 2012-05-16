@@ -4,6 +4,7 @@
 var fs        = require('fs'),
     ejs      = require('ejs'),
     template  = fs.readFileSync(require('path').join(module.filename, '../template.html')).toString(),
+    templateMD  = fs.readFileSync(require('path').join(module.filename, '../template.md')).toString(),
     highlight = function (source){
         //don't replace based on a special character, do replace based on <code> tags.
         return require("highlight").Highlight(source, false, true);
@@ -31,15 +32,20 @@ exports.version = '0.0.1';
  * @param  {string} source          JavaScript source code with comments
  * @param  {object} [options] 
  * @param  {string} [options.title] The title of the javascript library
+ * @param  {bool}   [options.md]    If true, render a markdown output rather than html
  * @return {string}                 An html representation of the documentation
  */
 exports.parse = function(source, options){
     options = options || {};
     var title = options.title || 'Documentation';
+    options.md = options.md || options.markdown;
     var dox = require('dox');
-    var obj = dox.parseComments(source);
-
-    return highlight(ejs.render(template, {title: title, comments:obj}));
+    var obj = dox.parseComments(source, {raw:options.md});
+    if(options.md){
+        return ejs.render(templateMD, {title: title, comments:obj});
+    }else{
+        return highlight(ejs.render(template, {title: title, comments:obj}));
+    }
 }
 
 /**
