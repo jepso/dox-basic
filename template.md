@@ -8,7 +8,7 @@
 <%- comment.description.full %>
 <% if(comment.tags){
   comment.tags.forEach(function(tag){
-%>@<%=tag.type%><%if(tag.types){%>{<%=tag.types.join("|")%>}<%}%> <%=tag.name||''%> <%=tag.description||''%>   
+%>@<%=tag.type%><%if(tag.types){%> {<%=tag.types.join("|")%>}<%}%> <%=tag.name||''%> <%=tag.description||''%>   
 <%})
 }
 } 

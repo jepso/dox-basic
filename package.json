@@ -1,6 +1,6 @@
 {   "name": "dox-basic"
   , "description": "Markdown / JSdoc documentation generator using dox"
-  , "version": "0.0.3"
+  , "version": "0.0.4"
   , "keywords": ["documentation", "docs", "markdown", "jsdoc"]
   , "bin": { "dox-basic": "./bin/dox-basic" }
   , "dependencies": {
