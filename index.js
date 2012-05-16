@@ -61,7 +61,7 @@ exports.parse = function(source, options){
     }
 }
 
-/**
+/*!
  * Parse source code to produce documentation without the surrounding html page
  * 
  * @param  {string} source          JavaScript source code with comments
